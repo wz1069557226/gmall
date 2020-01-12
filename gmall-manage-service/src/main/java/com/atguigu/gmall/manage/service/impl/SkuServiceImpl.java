@@ -28,7 +28,7 @@ public class SkuServiceImpl implements SkuService {
     public String saveSkuInfo(PmsSkuInfo pmsSkuInfo) {
 
         //默认图片操作
-        if (StringUtils.isBlank(pmsSkuInfo.getSkuDefaultImg())) {
+        if (StringUtils.isBlank(pmsSkuInfo.getSkuDefaultImg())&&!pmsSkuInfo.getSkuImageList().isEmpty()) {
             pmsSkuInfo.setSkuDefaultImg(pmsSkuInfo.getSkuImageList().get(0).getImgUrl());
         }
 
@@ -58,5 +58,17 @@ public class SkuServiceImpl implements SkuService {
         }
 
         return "success";
+    }
+
+    @Override
+    public PmsSkuInfo getSkuById(String skuId) {
+        //sku商品对象
+        PmsSkuInfo pmsSkuInfo = pmsSkuInfoMpper.selectByPrimaryKey(skuId);
+        //图片信息
+        PmsSkuImage pmsSkuImage = new PmsSkuImage();
+        pmsSkuImage.setSkuId(skuId);
+        List<PmsSkuImage> images = pmsSkuImageMapper.select(pmsSkuImage);
+        pmsSkuInfo.setSkuImageList(images);
+        return pmsSkuInfo;
     }
 }

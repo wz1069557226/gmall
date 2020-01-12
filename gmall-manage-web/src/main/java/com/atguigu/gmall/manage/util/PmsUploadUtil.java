@@ -1,6 +1,5 @@
 package com.atguigu.gmall.manage.util;
 
-import org.csource.common.MyException;
 import org.csource.fastdfs.ClientGlobal;
 import org.csource.fastdfs.StorageClient;
 import org.csource.fastdfs.TrackerClient;
@@ -14,7 +13,7 @@ public class PmsUploadUtil {
 
     public static String uploadImage(MultipartFile multipartFile) {
 
-        String imgUrl = "http://192.168.190.128";
+        String imgUrl = "http://192.168.190.129";
 
         ClassPathResource classPathResource = new ClassPathResource("tracker.conf");
 
